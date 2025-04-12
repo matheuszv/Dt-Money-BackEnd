@@ -73,4 +73,16 @@ app.delete('/transatations/:id', async (req, res) => {
     res.status(200).json({message: 'Trasanção deletada com sucesso'})
 })
 
-app.listen(3000)
+app.listen(3000, () => {
+    console.log('Servidor rodando na porta 3000')
+  
+    // Aqui é o lugar ideal pro ping automático:
+    setInterval(async () => {
+      try {
+        await prisma.transatations.findFirst()
+        console.log('Ping automático enviado')
+      } catch (err) {
+        console.error('Erro no ping automático:', err)
+      }
+    }, 5 * 60 * 1000) // a cada 5 minutos
+  })
