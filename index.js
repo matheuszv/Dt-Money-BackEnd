@@ -10,7 +10,6 @@ app.use(cors());
 
 app.use(express.json())
 
-
 app.post('/transatations', async (req, res) => {
 
     const transaction = await prisma.transatations.create({
